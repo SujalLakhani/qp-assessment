@@ -1,0 +1,18 @@
+CREATE TABLE IF NOT EXISTS groceries (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100),
+  price DECIMAL,
+  quantity INT
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INT REFERENCES orders(id) ON DELETE CASCADE,
+  grocery_id INT REFERENCES groceries(id) ON DELETE CASCADE,
+  quantity INT
+);
